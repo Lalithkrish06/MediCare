@@ -42,7 +42,36 @@ The application allows users to register, verify accounts through email OTP, sec
 | Email Service | JavaMail API |
 
 ---
+# 📸 Project Preview
 
+## 🔐 Login Page
+Modern and secure login interface with email-password authentication and OTP verification support.
+
+<img width="1370" height="996" alt="Screenshot 2026-05-24 184606" src="https://github.com/user-attachments/assets/e29b89e0-2738-4f7c-a05b-7485731bedb8" />
+
+
+---
+
+## 📝 Registration Page
+User-friendly registration form with input validation, email verification, and secure account creation workflow.
+
+<img width="1417" height="998" alt="Screenshot 2026-05-24 191256" src="https://github.com/user-attachments/assets/5d77c489-381f-4040-b4b8-f71551eb459f" />
+
+
+
+
+---
+
+## 💊 Medicine Recommendation Dashboard
+Interactive dashboard for searching symptoms and receiving medicine recommendations with dosage, side effects, and precautions.
+
+<img width="1534" height="991" alt="Screenshot 2026-05-24 191326" src="https://github.com/user-attachments/assets/78f70dad-a0e7-48a8-975d-456368cf7bc5" />
+
+
+<img width="1495" height="868" alt="Screenshot 2026-05-24 191400" src="https://github.com/user-attachments/assets/7ab1c8b4-abd4-41e8-a78a-6b2e60b21f5c" />
+
+
+---
 # 📂 Project Structure
 
 ```text
@@ -69,3 +98,4 @@ MediCare/
 │       ├── home.jsp
 │       └── results.jsp
 
+---
