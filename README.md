@@ -1,116 +1,96 @@
-# 🏥 MediCare — Medical Symptom & Medicine Recommendation System
+﻿# 🏥 MediCare — Medical Symptom & Tablet Recommender
 
 > **Developed by LALITH KRISH**  
-> **Department:** Artificial Intelligence & Data Science  
-> **Technology Stack:** Java | JSP | Servlets | JDBC | MySQL | Maven | Apache Tomcat
+> **Technology Stack:** Java 17 | JSP | Servlets | JDBC | MySQL 8.0 | Maven | Jetty / Apache Tomcat
 
 ---
 
-# 📌 Project Overview
+## 🚀 Quick Start (1-Click Run)
 
-MediCare is a secure full-stack healthcare web application designed to provide users with symptom-based medicine recommendations through a clean and responsive interface. The system includes OTP-based authentication, secure password handling, session management, and an intelligent medicine recommendation module.
+### Method 1: Using `run.bat` (Recommended)
+Simply double-click **`run.bat`** in the project folder, or run in PowerShell/Terminal:
+```powershell
+.\run.bat
+```
+Then open your browser to:
+👉 **`http://localhost:8080/MediCare`**
 
-The application allows users to register, verify accounts through email OTP, securely log in, search symptoms, and receive medicine suggestions with dosage instructions, side effects, and precautions.
+### Method 2: Using Maven Command Line
+```bash
+mvn clean jetty:run
+```
+Access at **`http://localhost:8080/MediCare`**.
 
----
-
-# 🚀 Key Features
-
-- 🔐 OTP-based User Authentication
-- 🔒 Secure Password Encryption using BCrypt
-- 💊 Symptom-based Medicine Recommendation
-- 📧 Email Verification using Gmail SMTP
-- 🗂️ Search History Tracking
-- ⏳ Session Timeout Management
-- 📱 Responsive User Interface
-- 🛡️ Secure Login & Logout System
-- ⚡ Full CRUD Database Integration
-
----
-
-# 🛠️ Technologies Used
-
-| Category | Technology |
-|---|---|
-| Frontend | JSP, HTML5, CSS3 |
-| Backend | Java Servlets |
-| Database | MySQL 8.0 |
-| Connectivity | JDBC |
-| Build Tool | Apache Maven |
-| Server | Apache Tomcat 9 |
-| Authentication | OTP + BCrypt |
-| Email Service | JavaMail API |
-
----
-# 📸 Project Preview
-
-## 🔐 Login Page
-Modern and secure login interface with email-password authentication and OTP verification support.
-
-<img width="1370" height="996" alt="Screenshot 2026-05-24 184606" src="https://github.com/user-attachments/assets/e29b89e0-2738-4f7c-a05b-7485731bedb8" />
-
+### Method 3: Deploy WAR to Apache Tomcat
+To generate the production WAR archive:
+```bash
+.\build.bat
+# OR
+mvn clean package
+```
+Copy `target/MediCare.war` to your Tomcat `webapps/` folder and start Tomcat.
 
 ---
 
-## 📝 Registration Page
-User-friendly registration form with input validation, email verification, and secure account creation workflow.
+## 📋 Features
 
-<img width="1417" height="998" alt="Screenshot 2026-05-24 191256" src="https://github.com/user-attachments/assets/5d77c489-381f-4040-b4b8-f71551eb459f" />
+- 🔐 **OTP-based User Authentication** (Supports real Gmail SMTP or instant Demo Mode with on-screen & console OTP fallback).
+- 🔒 **Secure Password Hashing** using BCrypt.
+- 💊 **Symptom-based Medicine Recommendation** (Headache, Fever, Cold, Cough, Acidity, etc.).
+- 📋 **Dosage, Side Effects, and Precautions** for all recommended medications.
+- 🗂️ **Search History Tracking** in MySQL database per user session.
+- ⏳ **Session Management** with secure logout and timeout handling.
+- 📱 **Clean & Modern Responsive Interface** with instant symptom selection chips.
 
+---
 
+## 🗄️ Database Setup (MySQL)
 
+1. Ensure MySQL 8.0 is running on `localhost:3306`.
+2. Run `database/schema.sql` to initialize `medicare_db` with all 25 symptoms and 20+ medicines:
+   ```sql
+   SOURCE database/schema.sql;
+   ```
+3. Database credentials can be customized in `src/main/java/com/medicare/util/DBConnection.java` or via environment variables:
+   - `MEDICARE_DB_URL` (default: `jdbc:mysql://localhost:3306/medicare_db`)
+   - `MEDICARE_DB_USER` (default: `root`)
+   - `MEDICARE_DB_PASS` (default: `Lali@2006`)
 
 ---
 
-## 💊 Medicine Recommendation Dashboard
-Interactive dashboard for searching symptoms and receiving medicine recommendations with dosage, side effects, and precautions.
+## 📧 Email & OTP Configuration
 
-<img width="1534" height="991" alt="Screenshot 2026-05-24 191326" src="https://github.com/user-attachments/assets/78f70dad-a0e7-48a8-975d-456368cf7bc5" />
-
-
-<img width="1495" height="868" alt="Screenshot 2026-05-24 191400" src="https://github.com/user-attachments/assets/7ab1c8b4-abd4-41e8-a78a-6b2e60b21f5c" />
-
+- **Demo / Offline Mode (Automatic)**: If Gmail credentials are left default, OTP codes are automatically printed to the terminal console and shown on the verification page for immediate offline testing.
+- **Production Gmail SMTP**: Set your Gmail address and 16-character App Password in `EmailUtil.java` or via environment variables:
+   - `MEDICARE_EMAIL`: `your_email@gmail.com`
+   - `MEDICARE_EMAIL_PASS`: `xxxx xxxx xxxx xxxx`
 
 ---
-# 📂 Project Structure
+
+## 📂 Project Structure
 
 ```text
-MediCare/
-├── pom.xml
+MediCare-main/
+├── pom.xml                   ← Standard Maven build file
+├── run.bat                   ← 1-Click launcher (Jetty server)
+├── build.bat                 ← 1-Click WAR packager
 ├── database/
-│   └── schema.sql
-├── screenshots/
-│   ├── login.png
-│   ├── register.png
-│   └── dashboard.png
-├── src/main/
-│   ├── java/com/medicare/
-│   │   ├── dao/
-│   │   ├── model/
-│   │   ├── servlet/
-│   │   └── util/
-│   └── webapp/
-│       ├── css/
-│       ├── WEB-INF/
-│       ├── index.jsp
-│       ├── login.jsp
-│       ├── register.jsp
-│       ├── home.jsp
-│       └── results.jsp
-
+│   └── schema.sql            ← MySQL schema and seed data
+└── src/main/
+    ├── java/com/medicare/
+    │   ├── dao/              ← UserDAO.java, MedicineDAO.java
+    │   ├── model/            ← User.java, Medicine.java
+    │   ├── servlet/          ← Servlets (Login, Register, OTP, Search, Logout)
+    │   └── util/             ← DBConnection.java, EmailUtil.java
+    └── webapp/
+        ├── WEB-INF/
+        │   └── web.xml       ← Deployment descriptor
+        ├── css/
+        │   └── style.css     ← UI styling
+        ├── index.jsp         ← Welcome / redirect page
+        ├── login.jsp         ← Login form
+        ├── register.jsp      ← Registration form
+        ├── verify-otp.jsp    ← OTP entry & countdown timer
+        ├── home.jsp          ← Symptom selector dashboard
+        └── results.jsp       ← Medicine recommendations
 ```
----
-
-# 👨‍💻 Developer
-
-**Lalith Krish**
-
-AI & Data Science Engineer
-
-📧 **Email:** lalithkrish2006@gmail.com
-
-💼 **LinkedIn:** https://www.linkedin.com/in/lalithkrish-data
-
-🐙 **GitHub:** https://github.com/Lalithkrish06
-
----
