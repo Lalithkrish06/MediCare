@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+﻿<%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,6 +43,7 @@
         </div>
     </div>
 </div>
-<footer>&copy; 2024 MediCare &mdash; Developed by LALITH KRISH &nbsp;|&nbsp; 732924ADR059</footer>
+<footer>&copy; 2024 MediCare &mdash; Developed by LALITH KRISH</footer>
 </body>
 </html>
+

@@ -11,11 +11,19 @@ import java.sql.SQLException;
 public class DBConnection {
 
     // -------------------------------------------------------
-    // CHANGE these values to match your local MySQL setup
+    // Local MySQL credentials with environment variable overrides
     // -------------------------------------------------------
-    private static final String URL      = "jdbc:mysql://localhost:3306/medicare_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
-    private static final String USER     = "root";
-    private static final String PASSWORD = "Lali@2006";
+    private static final String URL = System.getenv("MEDICARE_DB_URL") != null
+            ? System.getenv("MEDICARE_DB_URL")
+            : "jdbc:mysql://localhost:3306/medicare_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+
+    private static final String USER = System.getenv("MEDICARE_DB_USER") != null
+            ? System.getenv("MEDICARE_DB_USER")
+            : "root";
+
+    private static final String PASSWORD = System.getenv("MEDICARE_DB_PASS") != null
+            ? System.getenv("MEDICARE_DB_PASS")
+            : "Lali@2006";
     // -------------------------------------------------------
 
     static {
