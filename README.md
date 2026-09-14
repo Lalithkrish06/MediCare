@@ -98,4 +98,19 @@ MediCare/
 │       ├── home.jsp
 │       └── results.jsp
 
+```
+---
+
+# 👨‍💻 Developer
+
+**Lalith Krish**
+
+AI & Data Science Engineer
+
+📧 **Email:** lalithkrish2006@gmail.com
+
+💼 **LinkedIn:** https://www.linkedin.com/in/lalithkrish-data
+
+🐙 **GitHub:** https://github.com/Lalithkrish06
+
 ---
