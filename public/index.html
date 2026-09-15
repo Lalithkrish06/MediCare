@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>MediCare - Medical Symptom & Tablet Recommender</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>"/>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+    <div class="brand" style="cursor:pointer;" onclick="navigateTo('home')">🏥 Medi<span>Care</span></div>
+    <div class="nav-links" id="navLinks" style="display:none;">
+        <a href="#home" onclick="navigateTo('home'); return false;">🏠 Home</a>
+        <a href="#logout" class="logout" onclick="handleLogout(); return false;">🚪 Logout</a>
+    </div>
+</nav>
+
+<!-- Main Container for Views -->
+<main id="appContainer">
+
+    <!-- VIEW 1: LOGIN -->
+    <div id="view-login" class="app-view active">
+        <div class="auth-wrapper">
+            <div class="auth-card">
+                <div class="logo-icon">🏥</div>
+                <h2>MediCare</h2>
+                <p class="subtitle">Login to your medical assistant account</p>
+
+                <div id="loginAlert" class="alert" style="display:none;"></div>
+
+                <div style="background:#e8f4fd; border:1px solid #bbdefb; border-radius:8px; padding:10px 14px; margin-bottom:18px; font-size:12.5px; color:#0d47a1;">
+                    💡 <strong>Quick Demo Access:</strong> Use <code style="background:#fff;padding:2px 6px;border-radius:4px;">user@medicare.com</code> / <code style="background:#fff;padding:2px 6px;border-radius:4px;">password123</code> or enter any email &amp; password.
+                </div>
+
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="loginEmail">📧 Email Address</label>
+                        <input type="email" id="loginEmail" placeholder="Enter your email" required value="user@medicare.com"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">🔒 Password</label>
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required value="password123"/>
+                    </div>
+                    <button type="submit" class="btn-primary">Login &amp; Verify via Email →</button>
+                </form>
+
+                <div class="auth-links" style="margin-top:20px;">
+                    Don't have an account? <a href="#register" onclick="navigateTo('register'); return false;">Register here</a>
+                </div>
+                <div class="auth-links" style="margin-top:8px;font-size:12px;color:#888;">
+                    After login, an OTP verification code will be generated for your session.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEW 2: REGISTER -->
+    <div id="view-register" class="app-view">
+        <div class="auth-wrapper">
+            <div class="auth-card">
+                <div class="logo-icon">🏥</div>
+                <h2>Create Account</h2>
+                <p class="subtitle">Join MediCare – your personal medical assistant</p>
+
+                <div id="registerAlert" class="alert" style="display:none;"></div>
+
+                <form id="registerForm" onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label for="regName">👤 Full Name</label>
+                        <input type="text" id="regName" placeholder="Enter your full name" required maxlength="100"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="regEmail">📧 Email Address</label>
+                        <input type="email" id="regEmail" placeholder="Enter your email" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="regPass">🔒 Password</label>
+                        <input type="password" id="regPass" placeholder="Minimum 6 characters" required minlength="6"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="regConfirmPass">🔒 Confirm Password</label>
+                        <input type="password" id="regConfirmPass" placeholder="Re-enter password" required/>
+                    </div>
+                    <button type="submit" class="btn-primary">Register &amp; Verify Email →</button>
+                </form>
+
+                <div class="auth-links" style="margin-top:20px;">
+                    Already have an account? <a href="#login" onclick="navigateTo('login'); return false;">Login here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEW 3: VERIFY OTP -->
+    <div id="view-otp" class="app-view">
+        <div class="auth-wrapper">
+            <div class="auth-card">
+                <div class="logo-icon">📧</div>
+                <h2>OTP Verification</h2>
+                <p class="subtitle">
+                    A 6-digit verification code has been sent to<br/>
+                    <strong id="otpMaskedEmail" style="color:#1565c0;">user****@medicare.com</strong>
+                </p>
+
+                <div id="otpAlert" class="alert" style="display:none;"></div>
+
+                <div style="background:#fff3cd; color:#856404; border:1px solid #ffeeba; border-radius:8px; padding:12px; margin-bottom:16px; font-size:13px; text-align:center;">
+                    🔐 <strong>Your Session OTP Code:</strong><br/>
+                    <strong id="sessionOtpDisplay" style="color:#0d47a1; font-size:22px; letter-spacing:4px; display:inline-block; margin:6px 0;">123456</strong><br/>
+                    <button type="button" onclick="autoFillOtp()" style="margin-top:6px; background:#1565c0; color:#fff; border:none; border-radius:6px; padding:6px 14px; font-size:12px; cursor:pointer; font-weight:600;">
+                        ⚡ Click to Auto-Fill Code
+                    </button>
+                </div>
+
+                <form id="otpForm" onsubmit="handleVerifyOtp(event)">
+                    <div class="form-group">
+                        <label for="otpInput">Enter 6-Digit OTP</label>
+                        <input type="text" id="otpInput" class="otp-input" placeholder="_ _ _ _ _ _" maxlength="6" minlength="6" pattern="[0-9]{6}" required autocomplete="one-time-code"/>
+                    </div>
+                    <button type="submit" class="btn-primary">✅ Verify OTP</button>
+                </form>
+
+                <div class="otp-timer">
+                    OTP expires in: <span id="countdown">10:00</span>
+                </div>
+
+                <div class="auth-links" style="margin-top:20px;">
+                    <a href="#login" onclick="navigateTo('login'); return false;">← Back to Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEW 4: HOME DASHBOARD -->
+    <div id="view-home" class="app-view">
+        <div class="home-container">
+
+            <div class="welcome-banner">
+                <h1>👋 Welcome, <span id="homeUserName">User</span>!</h1>
+                <p>Your intelligent healthcare assistant. Select or search from 55+ symptoms to receive recommended tablets, dosage instructions, precautions, and side effects.</p>
+            </div>
+
+            <!-- Stats Row -->
+            <div class="stats-row" style="margin-bottom:28px;">
+                <div class="stat-card">
+                    <div class="stat-icon">💊</div>
+                    <div class="stat-num">44+</div>
+                    <div class="stat-label">Verified Tablets &amp; Medicines</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🩺</div>
+                    <div class="stat-num" id="symptomCount">55+</div>
+                    <div class="stat-label">Symptom Conditions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📋</div>
+                    <div class="stat-num">Dosage</div>
+                    <div class="stat-label">Precautions &amp; Timing</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🔒</div>
+                    <div class="stat-num">Secure</div>
+                    <div class="stat-label">OTP Authentication</div>
+                </div>
+            </div>
+
+            <!-- Symptom Category Filter Tabs -->
+            <div class="category-tabs" id="categoryTabs">
+                <button type="button" class="cat-btn active" onclick="filterCategory('all', this)">🌐 All Symptoms</button>
+                <button type="button" class="cat-btn" onclick="filterCategory('respiratory', this)">🫁 Respiratory &amp; Cold</button>
+                <button type="button" class="cat-btn" onclick="filterCategory('digestive', this)">🍽️ Digestive &amp; Gut</button>
+                <button type="button" class="cat-btn" onclick="filterCategory('pain', this)">🧠 Head &amp; Body Pain</button>
+                <button type="button" class="cat-btn" onclick="filterCategory('skin', this)">🧴 Skin &amp; Allergy</button>
+                <button type="button" class="cat-btn" onclick="filterCategory('ent', this)">👁️ Eyes, Ears &amp; Teeth</button>
+                <button type="button" class="cat-btn" onclick="filterCategory('general', this)">⚡ Lifestyle &amp; Chronic</button>
+            </div>
+
+            <!-- Search Form -->
+            <div class="search-card">
+                <h3>🔍 Search Symptom for Tablet Recommendation</h3>
+
+                <!-- Quick filter / search box -->
+                <input type="text" id="filterInput" class="quick-filter-input"
+                       placeholder="🔎 Type to search any symptom (e.g. Headache, Cough, Fever, Acidity, Migraine)..."
+                       onkeyup="filterDropdown()"/>
+
+                <form onsubmit="handleSearch(event)">
+                    <div class="search-row">
+                        <select name="symptom" id="symptomSelect" required size="1">
+                            <option value="">-- Choose or Select a Symptom --</option>
+                        </select>
+                        <button type="submit">Get Tablets 💊</button>
+                    </div>
+                    <div class="search-helper-text">
+                        💡 Tip: You can type in the box above to immediately filter symptoms, or click any common chip below.
+                    </div>
+                </form>
+
+                <!-- Common Symptom Chips -->
+                <div style="margin-top:22px;">
+                    <p class="chips-label">🔥 Quick Popular Symptoms (Click to Select):</p>
+                    <div class="chips" id="chipsContainer"></div>
+                </div>
+            </div>
+
+            <!-- Instructions & Safe Medication Guidelines Section -->
+            <div class="instruction-section">
+                <div class="guideline-card">
+                    <h4>📋 Patient Medication &amp; Tablet Instructions</h4>
+                    <ul class="guideline-list">
+                        <li><strong>Follow Prescribed Dosage:</strong> Never double the dose if you miss one. Strictly adhere to prescribed intervals.</li>
+                        <li><strong>Food Timing:</strong> Pain relievers (Ibuprofen, Diclofenac) must be taken <em>strictly after meals</em> to protect stomach lining.</li>
+                        <li><strong>Antacid &amp; PPI Timing:</strong> Take medications like Pantoprazole or Omeprazole <em>30 minutes before breakfast</em> on an empty stomach.</li>
+                        <li><strong>Hydration:</strong> Always swallow tablets with a full glass of plain water. Never swallow dry.</li>
+                        <li><strong>Antibiotic Discipline:</strong> Always complete the full course of antibiotics (e.g. Amoxicillin, Azithromycin) even if symptoms improve early.</li>
+                        <li><strong>Avoid Alcohol:</strong> Do not consume alcohol with painkillers, antihistamines, or antibiotics as it enhances side effects.</li>
+                    </ul>
+                </div>
+
+                <div class="guideline-card emergency">
+                    <h4>🚨 Emergency Warning Red Flags</h4>
+                    <ul class="guideline-list">
+                        <li><strong>Severe Breathlessness:</strong> Sudden difficulty breathing, wheezing, or lips/fingernails turning pale or blue.</li>
+                        <li><strong>Chest Pain:</strong> Crushing pressure or heaviness in chest radiating to left arm, neck, or back.</li>
+                        <li><strong>High Unresponsive Fever:</strong> Body temperature exceeding 103°F (39.5°C) that does not reduce with antipyretics.</li>
+                        <li><strong>Anaphylactic Reaction:</strong> Rapid swelling of lips, tongue, face, or throat accompanied by dizziness or fainting.</li>
+                        <li><strong>Neurological Signs:</strong> Sudden severe headache ("thunderclap"), slurred speech, or weakness on one side of body.</li>
+                        <li><strong>Continuous Vomiting:</strong> Inability to keep any liquids down for more than 12 hours leading to severe dehydration.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Medical Disclaimer Card -->
+            <div class="disclaimer">
+                ⚠️ <strong>Medical Disclaimer:</strong> The medicine recommendations provided by MediCare are designed for
+                <strong>educational and informational awareness only</strong>. MediCare does not replace clinical consultation, diagnosis,
+                or prescription by a certified medical physician or pharmacist. Always consult your healthcare provider before beginning any treatment.
+            </div>
+
+        </div>
+    </div>
+
+    <!-- VIEW 5: RESULTS -->
+    <div id="view-results" class="app-view">
+        <div class="results-container">
+
+            <button type="button" class="back-btn" onclick="navigateTo('home')">← Back to Symptom Search</button>
+
+            <div class="results-header">
+                <h2>💊 Recommended Tablets &amp; Medicines for: <em id="resultSymptomName" style="color:#0d47a1;">Condition</em></h2>
+                <p>Found <strong id="resultMedicineCount">0</strong> clinically recognized tablet/medicine option(s) for this condition.</p>
+            </div>
+
+            <!-- Container for Recommended Medicine Cards -->
+            <div id="medCardsContainer"></div>
+
+            <!-- Supportive Home Care & Recovery Guidance -->
+            <div class="home-care-card">
+                <h3>🌿 Supportive Home Care &amp; Recovery Guidance for <span id="homeCareSymptomTitle">Condition</span></h3>
+                <ul class="home-care-list">
+                    <li><strong>Adequate Hydration:</strong> Drink at least 2.5 to 3 liters of fluids daily (warm water, broths, electrolyte drinks) to support recovery.</li>
+                    <li><strong>Rest &amp; Sleep:</strong> Ensure 7–8 hours of sound sleep; physical rest is essential for tissue recovery and immune defense.</li>
+                    <li><strong>Dietary Recommendation:</strong> Eat light, freshly prepared, nutrient-dense meals. Avoid excessively spicy, oily, or processed foods during recovery.</li>
+                    <li><strong>Monitor Symptoms:</strong> Note any changes in symptom severity, body temperature, or new complications over 48–72 hours.</li>
+                    <li><strong>Emergency Threshold:</strong> If your condition worsens or high fever, chest pain, or breathlessness develops, visit the nearest emergency room immediately.</li>
+                </ul>
+            </div>
+
+            <!-- Quick Switcher Bar -->
+            <div class="quick-again-card">
+                <div>
+                    <strong>Check Another Symptom:</strong>
+                    <div style="font-size:12px;color:#777;">Search another condition instantly without returning to home.</div>
+                </div>
+                <form onsubmit="handleQuickSearch(event)" style="display:flex;gap:10px;align-items:center;flex:1;max-width:500px;">
+                    <select id="quickSymptomSelect" required>
+                        <option value="">-- Select Another Symptom --</option>
+                    </select>
+                    <button type="submit">View Tablets →</button>
+                </form>
+            </div>
+
+            <!-- Safety Notice -->
+            <div class="disclaimer">
+                ⚠️ <strong>Important Medical Safety Notice:</strong> The tablet recommendations and instructions shown here are for
+                <strong>educational and informational guidance only</strong>. Always read the physical medicine package insert.
+                Consult a certified healthcare provider or registered pharmacist before starting any new medication, particularly if pregnant, nursing, elderly, or managing chronic conditions.
+            </div>
+
+        </div>
+    </div>
+
+</main>
+
+<!-- Footer -->
+<footer>&copy; 2024 MediCare &mdash; Developed by LALITH KRISH</footer>
+
+<!-- Scripts -->
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
