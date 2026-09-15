@@ -261,24 +261,49 @@ into one complete application.
 
 ---
 
-# 📸 Screenshots
+## 🏥 MediCare — Medical Symptom & Medicine Information System
 
-Add your project screenshots here:
+> A Java-based healthcare web application for symptom-based medicine information.
 
-```text
-screenshots/
-├── login.png
-├── register.png
-├── otp-verification.png
-├── dashboard.png
-└── medicine-results.png
-```
+<p align="center">
+  <a href="https://lalimedinova.netlify.app/">
+    <img src="https://img.shields.io/badge/🚀%20LIVE%20DEMO-Launch%20MediCare-1565C0?style=for-the-badge" alt="Launch MediCare">
+  </a>
+</p>
 
-Example:
+---
 
-```markdown
-![Login Page](screenshots/login.png)
-```
+## 📸 Project Screenshots
+
+### 🔐 Secure Login
+<p align="center">
+  <img width="1892" height="1008" alt="Screenshot 2026-09-15 173239" src="https://github.com/user-attachments/assets/f85e6939-c128-4bb0-9de1-2068bea5874e" />
+
+</p>
+
+---
+
+### 📩 OTP Verification
+<p align="center">
+  <img width="1870" height="986" alt="Screenshot 2026-09-15 173256" src="https://github.com/user-attachments/assets/86e58aa8-b6c2-4c65-9881-d9df9666ea1f" />
+
+</p>
+
+---
+
+### 🏠 Healthcare Dashboard
+<p align="center">
+  <img width="1881" height="1007" alt="Screenshot 2026-09-15 173336" src="https://github.com/user-attachments/assets/3e56d098-1544-4976-bcfa-f766f2c0843b" />
+
+</p>
+
+---
+
+### 💊 Medicine Information & Recommendations
+<p align="center">
+  <img width="1896" height="1006" alt="Screenshot 2026-09-15 173358" src="https://github.com/user-attachments/assets/7c6f6c80-779b-42e9-9f6d-4a676098fb23" />
+
+</p>
 
 ---
 
