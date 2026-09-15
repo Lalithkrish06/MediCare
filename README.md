@@ -15,11 +15,10 @@
 
 ---
 
-## 👨‍💻 Developer
+## 🌐 Live Demo
 
-**LALITH KRISH**
-
-A Java-based web application designed to provide symptom-based medicine information through a structured and user-friendly interface.
+🚀 **Try MediNova Online:**  
+👉 [**Launch MediNova →**](https://lalimedinova.netlify.app/)
 
 ---
 
