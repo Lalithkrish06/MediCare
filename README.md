@@ -15,10 +15,11 @@
 
 ---
 
-## 🌐 Live Demo
+### 🏥 MediNova
 
-🚀 **Try MediNova Online:**  
-👉 [**Launch MediNova →**](https://lalimedinova.netlify.app/)
+**Modern healthcare web application for medical information and assistance.**
+
+🌐 **Live Demo:** [**Launch MediNova →**](https://lalimedinova.netlify.app/)
 
 ---
 
