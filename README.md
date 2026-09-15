@@ -19,7 +19,9 @@
 
 **Modern healthcare web application for medical information and assistance.**
 
-🌐 **Live Demo:** [**Launch MediNova →**](https://lalimedinova.netlify.app/)
+🌐 **Live Demo:** 
+
+👉 https://lalimedinova.netlify.app/
 
 ---
 
