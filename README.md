@@ -27,15 +27,7 @@
 
 ## 📌 Overview
 
-**MediCare** is a full-stack Java web application that allows users to:
 
-* 🔐 Register and authenticate securely
-* 📩 Verify accounts using OTP authentication
-* 💊 Search medicines based on selected symptoms
-* 📋 View dosage information, side effects, and precautions
-* 🗂️ Maintain user-specific search history
-* 🔒 Manage secure sessions and logout
-* 📱 Use the application through a responsive web interface
 
 The application uses **JSP and Servlets** for the web layer, **JDBC** for database connectivity, and **MySQL** for persistent data storage.
 
