@@ -17,7 +17,7 @@
 <div align="center">
 
 <a href="https://lalimedinova.netlify.app/">
-  <img src="https://img.shields.io/badge/🚀%20LIVE%20DEMO-Launch%20MediCare-1565C0?style=for-the-badge" alt="Launch MediCare">
+  <img src="https://img.shields.io/badge/⚡%20LIVE%20DEMO-Launch%20MediCare-1565C0?style=for-the-badge" alt="Launch MediCare">
 </a>
 
 </div>
